@@ -64,6 +64,15 @@ const jsonLd = {
     <meta name="naver-site-verification" content="e4a262b616457ea61099c057c79675d92028a2fd" />
 
     <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-H42NRQRMMM"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() { dataLayer.push(arguments); }
+      gtag('js', new Date());
+      gtag('config', 'G-H42NRQRMMM');
+    </script>
   </head>
   <body>
     <slot />
