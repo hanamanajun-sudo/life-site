@@ -1,0 +1,50 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <Header />
+  <main>
+    <article class="info content-width">
+      <h1>{title}</h1>
+      <slot />
+    </article>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .info {
+    padding: 64px 24px 96px;
+  }
+  .info h1 {
+    font-size: clamp(28px, 4vw, 36px);
+    margin: 0 0 32px;
+  }
+</style>
+
+<style is:global>
+  .info h2 {
+    font-size: 20px;
+    margin: 36px 0 12px;
+  }
+  .info p {
+    color: var(--color-ink-soft);
+    line-height: 1.85;
+    margin: 0 0 18px;
+  }
+  .info ul {
+    color: var(--color-ink-soft);
+    line-height: 1.85;
+    padding-left: 22px;
+  }
+</style>

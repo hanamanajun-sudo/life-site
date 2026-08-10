@@ -1,0 +1,110 @@
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css');
+@import url('https://fonts.googleapis.com/css2?family=Gowun+Batang:wght@400;700&display=swap');
+
+:root {
+  --color-bg: #faf5ec;
+  --color-bg-card: #fffdf8;
+  --color-bg-alt: #f2e8d8;
+  --color-ink: #2c2620;
+  --color-ink-soft: #6b6153;
+  --color-ink-faint: #9b9082;
+  --color-accent: #b6552f;
+  --color-accent-deep: #8a3f22;
+  --color-sage: #63755a;
+  --color-sage-deep: #4b5942;
+  --color-line: #e6d9c3;
+  --color-line-strong: #d3c1a1;
+
+  --font-display: 'Gowun Batang', 'Noto Serif KR', serif;
+  --font-body: 'PretendardVariable', 'Pretendard', -apple-system, sans-serif;
+
+  --shadow-card: 0 1px 2px rgba(44, 38, 32, 0.04), 0 8px 24px rgba(44, 38, 32, 0.06);
+  --shadow-card-hover: 0 2px 4px rgba(44, 38, 32, 0.06), 0 16px 32px rgba(44, 38, 32, 0.1);
+
+  --radius-card: 4px;
+  --content-width: 780px;
+  --wide-width: 1080px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: var(--color-bg);
+  background-image:
+    radial-gradient(ellipse 900px 500px at 15% -10%, rgba(182, 85, 47, 0.06), transparent),
+    radial-gradient(ellipse 700px 500px at 100% 0%, rgba(99, 117, 90, 0.05), transparent);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.75;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  color: var(--color-ink);
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  font-weight: 700;
+}
+
+a {
+  color: var(--color-accent);
+  text-decoration-color: rgba(182, 85, 47, 0.35);
+  text-underline-offset: 3px;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
+}
+
+a:hover {
+  color: var(--color-accent-deep);
+  text-decoration-color: currentColor;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+::selection {
+  background: rgba(182, 85, 47, 0.2);
+}
+
+.container {
+  max-width: var(--wide-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.content-width {
+  max-width: var(--content-width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--color-sage-deep);
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: '';
+  width: 14px;
+  height: 1px;
+  background: var(--color-sage);
+}

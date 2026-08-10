@@ -1,0 +1,131 @@
+---
+interface Props {
+  slug: string;
+  title: string;
+  description?: string;
+  category?: string;
+  date: string;
+  thumbnail?: string;
+  featured?: boolean;
+}
+
+const { slug, title, description, category, date, thumbnail, featured = false } = Astro.props;
+
+const formatted = new Date(date).toLocaleDateString('ko-KR', {
+  year: 'numeric',
+  month: 'long',
+  day: 'numeric',
+});
+---
+
+<a href={`/entry/${slug}/`} class:list={['card', { featured }]}>
+  {thumbnail && (
+    <div class="thumb">
+      <img src={thumbnail} alt="" loading="lazy" />
+    </div>
+  )}
+  <div class="body">
+    {category && <span class="eyebrow">{category}</span>}
+    <h3 class="title">{title}</h3>
+    {description && <p class="desc">{description}</p>}
+    <time class="date" datetime={date}>{formatted}</time>
+  </div>
+</a>
+
+<style>
+  .card {
+    display: flex;
+    flex-direction: column;
+    background: var(--color-bg-card);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-card);
+    overflow: hidden;
+    text-decoration: none;
+    color: var(--color-ink);
+    box-shadow: var(--shadow-card);
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-card-hover);
+    border-color: var(--color-line-strong);
+    color: var(--color-ink);
+  }
+
+  .thumb {
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    background: var(--color-bg-alt);
+  }
+
+  .thumb img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .card:hover .thumb img {
+    transform: scale(1.04);
+  }
+
+  .body {
+    padding: 20px 22px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .title {
+    margin: 2px 0 0;
+    font-size: 19px;
+    line-height: 1.4;
+  }
+
+  .desc {
+    margin: 0;
+    font-size: 14px;
+    color: var(--color-ink-soft);
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .date {
+    margin-top: auto;
+    padding-top: 6px;
+    font-size: 12.5px;
+    color: var(--color-ink-faint);
+  }
+
+  .card.featured {
+    flex-direction: row;
+  }
+
+  .card.featured .thumb {
+    flex: 1 1 48%;
+    aspect-ratio: auto;
+  }
+
+  .card.featured .body {
+    flex: 1 1 52%;
+    justify-content: center;
+  }
+
+  .card.featured .title {
+    font-size: 25px;
+  }
+
+  @media (max-width: 640px) {
+    .card.featured {
+      flex-direction: column;
+    }
+    .card.featured .thumb {
+      aspect-ratio: 4 / 3;
+    }
+  }
+</style>

@@ -1,0 +1,74 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import PostCard from '../components/PostCard.astro';
+
+const allPosts = (await getCollection('posts')).sort(
+  (a, b) => new Date(b.data.date).valueOf() - new Date(a.data.date).valueOf()
+);
+
+const [featured, ...rest] = allPosts;
+---
+
+<BaseLayout title="딸기핑크">
+  <Header />
+  <main>
+    <section class="hero">
+      <div class="container">
+        <p class="eyebrow">부모를 위한 육아 · 교육 · 심리 이야기</p>
+        <h1>아이를 키우며<br />함께 배우는 것들</h1>
+        <p class="hero-desc">
+          자녀 교육의 방법과 상식, 마음을 이해하는 심리 지식을 부모님들과 나눕니다.
+        </p>
+      </div>
+    </section>
+
+    <section class="container">
+      {featured && (
+        <div class="featured-wrap">
+          <PostCard {...featured.data} featured />
+        </div>
+      )}
+
+      <div class="grid">
+        {rest.map((post) => (
+          <PostCard {...post.data} />
+        ))}
+      </div>
+    </section>
+  </main>
+  <Footer />
+</BaseLayout>
+
+<style>
+  .hero {
+    padding: 64px 0 48px;
+    border-bottom: 1px solid var(--color-line);
+  }
+
+  .hero h1 {
+    margin: 12px 0 16px;
+    font-size: clamp(32px, 5vw, 48px);
+  }
+
+  .hero-desc {
+    max-width: 520px;
+    color: var(--color-ink-soft);
+    font-size: 16px;
+    line-height: 1.75;
+    margin: 0;
+  }
+
+  .featured-wrap {
+    margin: 48px 0 40px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 24px;
+    padding-bottom: 80px;
+  }
+</style>

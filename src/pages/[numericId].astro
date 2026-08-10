@@ -1,0 +1,28 @@
+---
+import { getCollection } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('posts');
+  return posts.map((post) => ({
+    params: { numericId: String(post.data.numericId) },
+    props: { slug: post.data.slug },
+  }));
+}
+
+const { slug } = Astro.props;
+const target = `/entry/${slug}/`;
+const canonicalURL = new URL(target, Astro.site);
+---
+
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="refresh" content={`0; url=${target}`} />
+    <link rel="canonical" href={canonicalURL} />
+    <title>이동 중...</title>
+  </head>
+  <body>
+    <p>페이지를 이동하고 있습니다. 자동으로 이동하지 않으면 <a href={target}>여기를 클릭</a>하세요.</p>
+  </body>
+</html>
